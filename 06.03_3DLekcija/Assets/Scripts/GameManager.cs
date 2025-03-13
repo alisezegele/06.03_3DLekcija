@@ -6,13 +6,14 @@ public class GameManager : MonoBehaviour
 {
     public Player player;
     public Enemy enemy;
-    public Character character;
     
     void Start()
     {
-        player.Shout();
-        Debug.Log("player name: " + player.CharName);
-        enemy.Shout();
-        character.Shout();
+        int damage = player.Attack();
+        enemy.GetHit(damage);
+        player.Weapon.ApplyEffect(enemy);
+        int enemyDamage = enemy.Attack();
+        player.GetHit(enemyDamage);
+        enemy.Weapon.ApplyEffect(player);
     }
 }
