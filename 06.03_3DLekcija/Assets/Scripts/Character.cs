@@ -13,7 +13,7 @@ public class Character : MonoBehaviour
         get { return weapon; }
     }
 
-    public int Attack()
+    public virtual int Attack()
     {
         return weapon.GetDamage();
     }
@@ -23,5 +23,12 @@ public class Character : MonoBehaviour
         Debug.Log(name + " starting health: " + health);
         health -= damage;
         Debug.Log("health after hit: " + health);
+    }
+
+    public void GetHit(Weapon weapon)
+    {
+        Debug.Log(name + " starting health: " + health);
+        health -= weapon.GetDamage();
+        Debug.Log("health after hit by "+ weapon.name + ": " + health);
     }
 }

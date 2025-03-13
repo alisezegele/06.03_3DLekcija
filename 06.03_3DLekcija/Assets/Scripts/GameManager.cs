@@ -24,8 +24,8 @@ public class GameManager : MonoBehaviour
 
     public void DoRound()
     {
-        int damage = player.Attack();
-        enemy.GetHit(damage);
+        //int damage = player.Attack();
+        enemy.GetHit(player.Weapon);
         player.Weapon.ApplyEffect(enemy);
         int enemyDamage = enemy.Attack();
         player.GetHit(enemyDamage);
