@@ -2,16 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text playerName, playerHealth, enemyName, enemyHealth;
     [SerializeField] private List<Weapon> availableWeapons;
+    [SerializeField] private GameObject gameOverPanel;
     
+    public static GameManager instance;
     public Player player;
     public Enemy enemy;
-    
+
+    void Awake()
+    {
+        Instance = this;
+    }
+
+    public static GameManager Instance { get; set; }
+
     void Start()
     {
         playerName.text = player.CharName;
@@ -42,5 +52,15 @@ public class GameManager : MonoBehaviour
         if (index >= 0 && index < availableWeapons.Count)
             player.Weapon = availableWeapons[index];
             Debug.Log("equipped weapon: " + player.Weapon.name);
+    }
+
+    public void GameOverScreen()
+    {
+        gameOverPanel.SetActive(true);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Character : MonoBehaviour
@@ -18,11 +16,24 @@ public class Character : MonoBehaviour
         return weapon.GetDamage();
     }
 
+    public int Health
+    {
+        get { return health; }
+        set
+        {
+            health = Mathf.Max(value, 0);
+
+            if (health == 0)
+            {
+                Die();
+            }
+        }
+    }
+
     public void GetHit(int damage)
     {
         Debug.Log(name + " starting health: " + health);
-        health -= damage;
-        Debug.Log("health after hit: " + health);
+        Health -= damage;
     }
 
     public void GetHit(Weapon weapon)
@@ -30,5 +41,11 @@ public class Character : MonoBehaviour
         Debug.Log(name + " starting health: " + health);
         health -= weapon.GetDamage();
         Debug.Log("health after hit by "+ weapon.name + ": " + health);
+    }
+
+    public void Die()
+    {
+        Debug.Log(name + " died!");
+        GameManager.Instance.GameOverScreen();
     }
 }
