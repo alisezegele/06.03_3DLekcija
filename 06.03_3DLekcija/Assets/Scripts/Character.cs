@@ -6,7 +6,7 @@ public class Character : MonoBehaviour
 {
     public int health;
     
-    [SerializeField] private Weapon weapon;
+    public Weapon weapon;
 
     public Weapon Weapon
     {
