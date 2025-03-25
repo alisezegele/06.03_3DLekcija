@@ -10,8 +10,7 @@ public class Player : Character
     {
         get { return charName; }
     }
-
-    // iespeja izveleties starp ierociem
+    
     public new Weapon Weapon
     {
         get { return weapon; }

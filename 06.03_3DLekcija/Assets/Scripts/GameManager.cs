@@ -46,12 +46,11 @@ public class GameManager : MonoBehaviour
         UpdateHealth();
     }
     
-    // iespeja izveleties starp ierociem
     public void SelectWeapon(int index)
     {
         if (index >= 0 && index < availableWeapons.Count)
             player.Weapon = availableWeapons[index];
-            Debug.Log("equipped weapon: " + player.Weapon.name);
+        Debug.Log("equipped weapon: " + player.Weapon.name);
     }
 
     public void GameOverScreen()
