@@ -11,11 +11,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private List<Weapon> availableWeapons;
     [SerializeField] private List<Enemy> enemyList;
     [SerializeField] private GameObject gameOverPanel;
-    
-    public static GameManager instance;
-    public Player player;
-    private Enemy currentEnemy;
 
+    public Player player;
+
+    private Enemy currentEnemy;
     private int currentEnemyIndex = 0;
 
     void Awake()
@@ -45,6 +44,11 @@ public class GameManager : MonoBehaviour
         if (player.Weapon is PoisonWeapon poisonWeapon)
         {
             poisonWeapon.ApplyPoison();
+        }
+        
+        if (currentEnemy is Wizard wizard)
+        {
+            wizard.CheckHealing();  // Check and apply healing if the wizard heals
         }
         
         currentEnemy.GetHit(player.Weapon);
@@ -86,7 +90,7 @@ public class GameManager : MonoBehaviour
             poisonText.text = show ? "Poisoned" : "";
         }
     }
-
+    
     public void SpawnEnemy()
     {
         foreach (Enemy enemy in enemyList)
