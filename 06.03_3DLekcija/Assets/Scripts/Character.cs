@@ -44,7 +44,7 @@ public class Character : MonoBehaviour
         Debug.Log("Health after hit by "+ weapon.name + ": " + health);
     }
 
-    public void Die()
+    private void Die()
     {
         Debug.Log(name + " died!");
         GameManager.Instance.GameOverScreen();

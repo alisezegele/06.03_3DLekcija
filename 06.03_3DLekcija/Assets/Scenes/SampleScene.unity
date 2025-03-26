@@ -161,9 +161,12 @@ MonoBehaviour:
   - {fileID: 2051707483}
   - {fileID: 789183609}
   - {fileID: 1400116904}
+  enemyList:
+  - {fileID: 1865713312}
+  - {fileID: 372052761}
+  - {fileID: 1346214248}
   gameOverPanel: {fileID: 2060196380}
   player: {fileID: 522554717}
-  enemy: {fileID: 1865713312}
 --- !u!4 &46066818
 Transform:
   m_ObjectHideFlags: 0

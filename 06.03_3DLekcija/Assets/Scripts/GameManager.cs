@@ -9,11 +9,14 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private TMP_Text playerName, playerHealth, enemyName, enemyHealth, poisonText;
     [SerializeField] private List<Weapon> availableWeapons;
+    [SerializeField] private List<Enemy> enemyList;
     [SerializeField] private GameObject gameOverPanel;
     
     public static GameManager instance;
     public Player player;
-    public Enemy enemy;
+    private Enemy currentEnemy;
+
+    private int currentEnemyIndex = 0;
 
     void Awake()
     {
@@ -25,14 +28,14 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         playerName.text = player.CharName;
-        enemyName.text = enemy.name;
+        SpawnEnemy();
         UpdateHealth();
     }
 
     private void UpdateHealth()
     {
         playerHealth.text = player.health.ToString();
-        enemyHealth.text = enemy.health.ToString();
+        enemyHealth.text = currentEnemy.health.ToString();
     }
 
     public void DoRound()
@@ -44,14 +47,19 @@ public class GameManager : MonoBehaviour
             poisonWeapon.ApplyPoison();
         }
         
-        enemy.GetHit(player.Weapon);
-        player.Weapon.ApplyEffect(enemy);
+        currentEnemy.GetHit(player.Weapon);
+        player.Weapon.ApplyEffect(currentEnemy);
         
-        int enemyDamage = enemy.Attack();
+        int enemyDamage = currentEnemy.Attack();
         player.GetHit(enemyDamage);
-        enemy.Weapon.ApplyEffect(player);
+        currentEnemy.Weapon.ApplyEffect(player);
         
         UpdateHealth();
+
+        if (currentEnemy.health <= 0)
+        {
+            ChangeEnemy();
+        }
     }
     
     public void SelectWeapon(int index)
@@ -77,5 +85,25 @@ public class GameManager : MonoBehaviour
         {
             poisonText.text = show ? "Poisoned" : "";
         }
+    }
+
+    public void SpawnEnemy()
+    {
+        foreach (Enemy enemy in enemyList)
+        {
+            enemy.gameObject.SetActive(false);
+        }
+
+        currentEnemy = enemyList[currentEnemyIndex];
+        currentEnemy.gameObject.SetActive(true);
+        enemyName.text = currentEnemy.name;
+        enemyHealth.text = currentEnemy.health.ToString();
+    }
+
+    public void ChangeEnemy()
+    {
+        currentEnemy.gameObject.SetActive(false);
+        currentEnemyIndex = (currentEnemyIndex + 1) % enemyList.Count;
+        SpawnEnemy();
     }
 }
