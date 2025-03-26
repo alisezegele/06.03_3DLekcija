@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private TMP_Text playerName, playerHealth, enemyName, enemyHealth;
+    [SerializeField] private TMP_Text playerName, playerHealth, enemyName, enemyHealth, poisonText;
     [SerializeField] private List<Weapon> availableWeapons;
     [SerializeField] private GameObject gameOverPanel;
     
@@ -37,12 +37,20 @@ public class GameManager : MonoBehaviour
 
     public void DoRound()
     {
-        //int damage = player.Attack();
+        Debug.Log("NEW ROUND");
+        
+        if (player.Weapon is PoisonWeapon poisonWeapon)
+        {
+            poisonWeapon.ApplyPoison();
+        }
+        
         enemy.GetHit(player.Weapon);
         player.Weapon.ApplyEffect(enemy);
+        
         int enemyDamage = enemy.Attack();
         player.GetHit(enemyDamage);
         enemy.Weapon.ApplyEffect(player);
+        
         UpdateHealth();
     }
     
@@ -61,5 +69,13 @@ public class GameManager : MonoBehaviour
     public void RestartGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void ShowPoisonText(bool show)
+    {
+        if (poisonText != null)
+        {
+            poisonText.text = show ? "Poisoned" : "";
+        }
     }
 }

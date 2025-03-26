@@ -34,13 +34,14 @@ public class Character : MonoBehaviour
     {
         Debug.Log(name + " starting health: " + health);
         Health -= damage;
+        Debug.Log("Damage taken: " + damage + ". "+ name + " health is now: " + health);
     }
 
     public void GetHit(Weapon weapon)
     {
         Debug.Log(name + " starting health: " + health);
         health -= weapon.GetDamage();
-        Debug.Log("health after hit by "+ weapon.name + ": " + health);
+        Debug.Log("Health after hit by "+ weapon.name + ": " + health);
     }
 
     public void Die()
