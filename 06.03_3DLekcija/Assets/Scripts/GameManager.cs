@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private TMP_Text playerName, playerHealth, enemyName, enemyHealth, poisonText;
     [SerializeField] private List<Weapon> availableWeapons;
     [SerializeField] private List<Enemy> enemyList;
+    [SerializeField] private List<GameObject> enemyImages;
     [SerializeField] private GameObject gameOverPanel;
 
     public Player player;
@@ -40,6 +41,8 @@ public class GameManager : MonoBehaviour
     public void DoRound()
     {
         Debug.Log("NEW ROUND");
+        
+        UpdateEnemyImage();
         
         if (player.Weapon is PoisonWeapon poisonWeapon)
         {
@@ -97,9 +100,16 @@ public class GameManager : MonoBehaviour
         {
             enemy.gameObject.SetActive(false);
         }
+        
+        foreach (GameObject enemyImage in enemyImages)
+        {
+            enemyImage.SetActive(false);
+        }
 
         currentEnemy = enemyList[currentEnemyIndex];
         currentEnemy.gameObject.SetActive(true);
+        enemyImages[currentEnemyIndex].SetActive(true);
+        
         enemyName.text = currentEnemy.name;
         enemyHealth.text = currentEnemy.health.ToString();
     }
@@ -109,5 +119,13 @@ public class GameManager : MonoBehaviour
         currentEnemy.gameObject.SetActive(false);
         currentEnemyIndex = (currentEnemyIndex + 1) % enemyList.Count;
         SpawnEnemy();
+    }
+    
+    private void UpdateEnemyImage()
+    {
+        for (int i = 0; i < enemyList.Count; i++)
+        {
+            enemyImages[i].SetActive(i == currentEnemyIndex);
+        }
     }
 }
