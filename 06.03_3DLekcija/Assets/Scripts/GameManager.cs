@@ -48,7 +48,7 @@ public class GameManager : MonoBehaviour
         
         if (currentEnemy is Wizard wizard)
         {
-            wizard.CheckHealing();  // Check and apply healing if the wizard heals
+            wizard.CheckHealing();
         }
         
         currentEnemy.GetHit(player.Weapon);
@@ -70,7 +70,7 @@ public class GameManager : MonoBehaviour
     {
         if (index >= 0 && index < availableWeapons.Count)
             player.Weapon = availableWeapons[index];
-        Debug.Log("equipped weapon: " + player.Weapon.name);
+        Debug.Log("Equipped weapon: " + player.Weapon.name);
     }
 
     public void GameOverScreen()

@@ -32,16 +32,16 @@ public class Character : MonoBehaviour
 
     public virtual void GetHit(int damage)
     {
-        Debug.Log(name + " starting health: " + health);
+        Debug.Log(name + "'s starting health: " + health);
         Health -= damage;
-        Debug.Log("Damage taken: " + damage + ". "+ name + " health is now: " + health);
+        Debug.Log("Damage taken: " + damage + ". "+ name + "'s health is now: " + health);
     }
 
     public void GetHit(Weapon weapon)
     {
-        Debug.Log(name + " starting health: " + health);
+        Debug.Log(name + "'s starting health: " + health);
         health -= weapon.GetDamage();
-        Debug.Log(weapon.name + " does " + weapon.GetDamage() + " damage. " + "Health after hit by "+ weapon.name + ": " + health);
+        Debug.Log(weapon.name + " does " + weapon.GetDamage() + " damage. " + name + "'s health after hit by "+ weapon.name + ": " + health);
     }
 
     private void Die()

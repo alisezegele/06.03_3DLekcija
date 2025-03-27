@@ -28,7 +28,7 @@ public class PoisonWeapon : Weapon
         }
         else
         {
-            Debug.Log(target.name + " didnt get poisoned");
+            Debug.Log(target.name + " didn't get poisoned");
         }
     }
 
@@ -37,7 +37,7 @@ public class PoisonWeapon : Weapon
         if (poisonedTarget != null && remainingPoisonRounds > 0)
         {
             poisonedTarget.GetHit(poisonStrength);
-            Debug.Log(poisonedTarget.name + " poisoned for " + poisonStrength + "dmg");
+            Debug.Log(poisonedTarget.name + " poisoned for " + poisonStrength + "damage");
             remainingPoisonRounds--;
 
             if (remainingPoisonRounds <= 0)

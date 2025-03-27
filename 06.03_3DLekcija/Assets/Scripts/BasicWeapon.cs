@@ -6,6 +6,6 @@ public class BasicWeapon : Weapon
 {
     public override void ApplyEffect(Character target)
     {
-        Debug.Log("No Additional Effect");
+        Debug.Log("No additional effect");
     }
 }
